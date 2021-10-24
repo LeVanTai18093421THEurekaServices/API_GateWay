@@ -1,0 +1,37 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: STUDENT-SERVICE
+          uri: lb://STUDENT-SERVICE
+          predicates:
+            - Path=/student/**
+        - id: DEPARTMENT-SERVICE
+          uri: lb://DEPARTMENT-SERVICE
+          predicates:
+            - Path=/department/**
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: STUDENT-SERVICE
+#          uri: lb://STUDENT-SERVICE
+#          predicates:
+#            - Path=/student/**
+#        - id: DEPARTMENT-SERVICE
+#          uri: lb://DEPARTMENT-SERVICE
+#          predicates:
+#            - Path=/department/**
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      hostname: localhost
+
